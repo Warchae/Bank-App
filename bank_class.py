@@ -2,6 +2,9 @@ from abc import ABC
 import uuid
 import datetime
 
+
+accounts = {}
+customers = {}
 int_rate = 3
 low_int = int_rate * 1.5
 med_int = int_rate * 1.8
@@ -25,13 +28,6 @@ class BankAccount(Customer):
         self.balance = 0  # Initialize balance
         self.loan = 0
         loanopen_datetime = 0
-
-    def setMoney(self, amount, toID):
-        if toID in self.accounts:
-            self.accounts[toID] += amount
-            print("Your Money Has Been Transferred To {} Account ID {} $ Successfully.".format(toID, amount))
-        else:
-            print("Account ID {} not found.".format(toID))
 
     def getMoney(self):
         print("Your Balance: ", self.balance)
@@ -104,25 +100,23 @@ class BankAccount(Customer):
             time = datetime.datetime.now()
             stdate = time.strftime("%Y%m%d%H%M%S")
             current_time = int(stdate)
-            bill = (interest_rate * (current_time - self.loanopen_datetime)/ (360*24*60*60) +self.loan
+            bill = (interest_rate * (current_time - self.loanopen_datetime)) / (360*24*60*60) + self.loan
             print(self.loan, "of Loan Cost You With Interest", bill)
             self.balance = self.balance - bill
             self.loan = 0
-            
 
-"""        
-    def moneyTransfer(self, amount, toID):    
-        if self.balance < amount:
+    def moneyTransfer(self, amount, yourID, toID):    
+        if accounts[yourID].balance < amount:
             print("Your Balance is Not Enough For Transfer!")
-        elif self.accountID == toID:
+        elif yourID == toID:
             print("You Cannot Transfer To Yourself!")
-        elif toID not in self.accounts:
+        elif toID not in accounts:
             print("Account ID not Valid.")
         else:
-            self.balance -= amount
-            self.setMoney(amount, toID)
-"""
-
+            accounts[self.toID].balance += amount
+            accounts[yourID].balance -= amount
+            print("Your Transaction Was Succesfully Made!")
+        
 class exchangeRate():
 
     def __init__(self):
