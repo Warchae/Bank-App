@@ -1,9 +1,7 @@
 from bank_class import *
 exc = exchangeRate()
 main = True
-while main:
-
-    main = 1
+while True:
     if main:
 
         print("""
@@ -55,27 +53,22 @@ while main:
                         if select == "1":
                             amount = int(input("How much money would you want to deposit: "))
                             accounts[customer_id].moneyDeposit(amount)
-                            logged_in = True
-                        elif select == "2":
+                        if select == "2":
                             amount = int(input("How much money would you want to withdraw: "))
                             accounts[customer_id].moneyWithdraw(amount)
-                            logged_in = True
-                        elif select == "3":
+                        if select == "3":
                             yourID = id
                             toID = input("Enter Account Number For Transfer: ")
                             amount = int(input("Enter Amount for Transfer: "))
                             accounts[customer_id].moneyTransfer(amount, yourID, toID)
-                            logged_in = True
-                        elif select == "4":
+                        if select == "4":
                             accounts[customer_id].takeCredit()
-                            logged_in = True
-                        elif select == "5":
+                        if select == "5":
                             accounts[customer_id].returnCredit()
-                            logged_in = True
-                        elif select == "6":
+                        if select == "6":
                             accounts[customer_id].getMoney()
-                            logged_in = True
-                        elif select == "7":
+                        logged_in = True
+                        if select == "7":
                             logged_in = False
                             
                 else:
